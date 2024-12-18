@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Sport and Snap</string>
+    <string name="signup">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="message_welcome_page">Selamat datang di Sport and Snap</string>
+    <string name="title_welcome_page">Selamat datang di Dicoding!</string>
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="message_login_page">Masukkan dulu datamu ya</string>
+    <string name="title_login_page">Sudah siap untuk upgrade skill?</string>
+    <string name="name">Nama</string>
+    <string name="message_main_page">Selamat Belajar di Dicoding.</string>
+    <string name="greeting">Halo %1$s,</string>
+    <string name="logout">Keluar</string>
+    <string name="log_out">Log Out</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="kamera">Kamera</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="empty_image_warning">Tidak ada foto yang di pilih\n</string>
+    <string name="selamat_datang">Selamat Datang</string>
+    <string name="silakan_masuk">Silakan Masuk</string>
+    <string name="mendaftar">Mendaftar</string>
+    <string name="buat_akun">Buat akun</string>
+    <string name="nama">Nama</string>
+    <string name="create_account">Buat Akun</string>
+    <string name="lengkapi_data">Lengkapi Data</string>
+    <string name="daftar_disini_jika_belum_punya_akun">Daftar disini jika belum punya akun</string>
+</resources>
