@@ -12,7 +12,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.dicoding.picodiploma.loginwithanimation.R
 
-class PwEditText: AppCompatEditText, View.OnTouchListener {
+class PwEditText : AppCompatEditText, View.OnTouchListener {
     private lateinit var clearButtonImage: Drawable
 
     constructor(context: Context) : super(context) {
@@ -43,7 +43,7 @@ class PwEditText: AppCompatEditText, View.OnTouchListener {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString().isNotEmpty()) showClearButton() else hideClearButton()
                 error = if (s.toString().length < 8) {
-                    "Password tidak boleh kurang dari 8 karakter"
+                    context.getString(R.string.min_password_8)
                 } else {
                     null
                 }

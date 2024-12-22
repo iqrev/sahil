@@ -54,7 +54,6 @@ class AddPhotoActivity : AppCompatActivity() {
     private fun uploadImage() {
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
-            Log.d("Image File", "showImage: ${imageFile.path}")
             val description = binding?.etDesc?.text.toString()
             binding?.progressBar?.visibility = View.VISIBLE
             val requestBody = description.toRequestBody("text/plain".toMediaType())
@@ -65,38 +64,46 @@ class AddPhotoActivity : AppCompatActivity() {
                 requestImageFile
             )
             viewModel.getSession().observe(this) { user ->
-                viewModel.uploadImage(user.token, multipartBody, requestBody).observe(this) { result ->
-                    if (result != null){
-                        when (result){
-                            is Result.Error -> {
-                                binding?.progressBar?.visibility = View.GONE
-                                Toast.makeText(
-                                    this,
-                                    "Terjadi kesalahan" + result.error,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            Result.Loading -> {
-                                binding?.progressBar?.visibility = View.VISIBLE
-                            }
-                            is Result.Success -> {
-                                binding?.progressBar?.visibility = View.GONE
-                                Toast.makeText(this, result.data.message.toString(), Toast.LENGTH_SHORT).show()
-                                val intent = Intent(this, MainActivity::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                startActivity(intent)
-                            }
+                viewModel.uploadImage(user.token, multipartBody, requestBody)
+                    .observe(this) { result ->
+                        if (result != null) {
+                            when (result) {
+                                is Result.Error -> {
+                                    binding?.progressBar?.visibility = View.GONE
+                                    Toast.makeText(
+                                        this,
+                                        getString(R.string.error) + ": " + result.error,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
 
+                                Result.Loading -> {
+                                    binding?.progressBar?.visibility = View.VISIBLE
+                                }
+
+                                is Result.Success -> {
+                                    binding?.progressBar?.visibility = View.GONE
+                                    Toast.makeText(
+                                        this,
+                                        result.data.message.toString(),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent = Intent(this, MainActivity::class.java)
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
+                                }
+
+                            }
                         }
                     }
-                }
             }
         } ?: Toast.makeText(this, R.string.empty_image_warning, Toast.LENGTH_SHORT).show()
     }
 
     private fun startCamera() {
         currentImageUri = getImageUri(this)
-        launcherIntentCamera.launch(currentImageUri)
+        launcherIntentCamera.launch(currentImageUri!!)
     }
 
     private fun startGallery() {
@@ -110,18 +117,23 @@ class AddPhotoActivity : AppCompatActivity() {
             showImage()
         } else {
             currentImageUri = null
-            Toast.makeText(this, "Gambar tidak diambil", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.gambar_tidak_diambil), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
-        if (uri != null){
+        if (uri != null) {
             currentImageUri = uri
             showImage()
         } else {
-            Log.d("Photo Picker", "No media selected")
+            Toast.makeText(
+                this,
+                getString(R.string.tidak_ada_gambar_yang_di_pilih), Toast.LENGTH_SHORT
+            ).show()
+
         }
     }
 
@@ -132,6 +144,7 @@ class AddPhotoActivity : AppCompatActivity() {
             binding?.previewImageView?.setImageURI(it)
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
 

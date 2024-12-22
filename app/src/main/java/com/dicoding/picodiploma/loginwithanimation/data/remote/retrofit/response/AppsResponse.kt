@@ -77,6 +77,7 @@ data class LoginResult(
     @field:SerializedName("token")
     val token: String? = null
 )
+
 data class RegisterResponse(
 
     @field:SerializedName("error")
@@ -89,7 +90,7 @@ data class RegisterResponse(
 data class StoryResponse(
 
     @field:SerializedName("listStory")
-    val listStory: List<ListStoryItem?>? = emptyList(),
+    val listStory: List<ListStoryItem> = emptyList(),
 
     @field:SerializedName("error")
     val error: Boolean? = null,

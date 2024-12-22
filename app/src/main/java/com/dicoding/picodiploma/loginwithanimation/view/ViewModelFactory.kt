@@ -9,9 +9,11 @@ import com.dicoding.picodiploma.loginwithanimation.view.addphoto.AddPhotoViewMod
 import com.dicoding.picodiploma.loginwithanimation.view.detail.DetailStoryViewModel
 import com.dicoding.picodiploma.loginwithanimation.view.login.LoginViewModel
 import com.dicoding.picodiploma.loginwithanimation.view.main.MainViewModel
+import com.dicoding.picodiploma.loginwithanimation.view.maps.MapsViewModel
 import com.dicoding.picodiploma.loginwithanimation.view.signup.SignUpViewModel
 
-class ViewModelFactory(private val repository: StoryRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val repository: StoryRepository) :
+    ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -19,18 +21,27 @@ class ViewModelFactory(private val repository: StoryRepository) : ViewModelProvi
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(AddPhotoViewModel::class.java) -> {
-                AddPhotoViewModel(repository) as T
-            }
+
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
                 SignUpViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(DetailStoryViewModel::class.java) -> {
                 DetailStoryViewModel(repository) as T
             }
+
+            modelClass.isAssignableFrom(AddPhotoViewModel::class.java) -> {
+                AddPhotoViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(repository) as T
+            }
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -38,14 +49,18 @@ class ViewModelFactory(private val repository: StoryRepository) : ViewModelProvi
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
+
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
+                    INSTANCE = ViewModelFactory(
+                        Injection.provideRepository(context)
+                    )
                 }
             }
             return INSTANCE as ViewModelFactory
         }
+
     }
 }

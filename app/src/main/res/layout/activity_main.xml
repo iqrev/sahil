@@ -21,8 +21,8 @@
             app:menu="@menu/option_menu"
             app:title="@string/app_name"
             android:visibility="gone"
-            tools:visibility="visible"/>
-    2
+            tools:visibility="visible" />
+        2
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -35,18 +35,38 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:listitem="@layout/item_story" />
 
+    \
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_story"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:fabSize="normal"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/ic_addphoto"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.647"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_maps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_maps"
+        android:visibility="gone"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -55,8 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

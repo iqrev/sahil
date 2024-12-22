@@ -1,11 +1,8 @@
 package com.dicoding.picodiploma.loginwithanimation.view.login
 
-import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -39,18 +36,24 @@ class LoginActivity : AppCompatActivity() {
             val email = binding?.edEmail?.text.toString()
             val pwd = binding?.edPassword?.text.toString()
             viewModel.postUserLogin(email, pwd).observe(this) { result ->
-                if (result != null){
-                    when (result){
+                if (result != null) {
+                    when (result) {
                         is Result.Error -> {
                             binding?.progressBar?.visibility = View.GONE
                             Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                         }
+
                         Result.Loading -> {
                             binding?.progressBar?.visibility = View.VISIBLE
                         }
+
                         is Result.Success -> {
                             binding?.progressBar?.visibility = View.GONE
-                            viewModel.saveSession(UserModel(email, result.data.loginResult?.token.toString()))
+                            viewModel.saveSession(
+                                UserModel(
+                                    email, result.data.loginResult?.token.toString()
+                                )
+                            )
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -97,7 +100,6 @@ class LoginActivity : AppCompatActivity() {
         slideUpPassword.start()
         slideUpButton.start()
     }
-
 
 
     override fun onDestroy() {

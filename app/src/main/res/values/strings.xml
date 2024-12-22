@@ -27,4 +27,11 @@
     <string name="create_account">Buat Akun</string>
     <string name="lengkapi_data">Lengkapi Data</string>
     <string name="daftar_disini_jika_belum_punya_akun">Daftar disini jika belum punya akun</string>
+    <string name="add_photo">Gambar yang sudah di upload</string>
+    <string name="error">Terjadi kesalahan</string>
+    <string name="min_password">Password tidak boleh kurang dari 8 karakter</string>
+    <string name="tidak_ada_gambar_yang_di_pilih">Tidak ada gambar yang di pilih</string>
+    <string name="gambar_tidak_diambil">Gambar tidak diambil</string>
+    <string name="min_password_8">Password tidak boleh kurang dari 8 karakter</string>
+    <string name="retry">Coba Lagi</string>
 </resources>
